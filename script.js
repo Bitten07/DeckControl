@@ -28,7 +28,20 @@ const naipesVermelhos = ["♥",  "♦"];
 const container = document.getElementById("cartas")
 const painelDescritivo = document.getElementById("texto-descricao")
 const tituloDescritivo = document.getElementById("titulo-carta")
-
+const pesquisaCarta = document.getElementById("pesquisaCarta")
+pesquisaCarta.addEventListener("input", function(){
+    const termo = pesquisaCarta.value.toLowerCase().trim();
+    const cartaPesquisada = document.querySelectorAll(".carta")
+    cartaPesquisada.forEach(function(carta){
+        const valor = carta.dataset.valor.toLowerCase()
+        const naipe = carta.dataset.naipe.toLowerCase()
+        if(valor.includes(termo) || naipe.includes(termo)){
+            carta.style.display = "block"
+        } else {
+            carta.style.display = "none"
+        }
+    })
+})
 
 function salvarCartas(){
     const cartasAtivas = document.querySelectorAll(".carta.ativa");

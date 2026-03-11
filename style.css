@@ -2,16 +2,22 @@ header{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 30px;
+}
+
+#titulo{
+    font-size: 36px;
+    margin: 20px 0;
+    color: white;
 }
 
 body{
-    background-color: #ccc;
+    background-image: linear-gradient(to bottom, #3b006e, #8300F5);
     margin: 0px;
 }
 
 main{
     display: flex;
+    margin: 30px;
 }
 #cartas{
     width: 70%;
@@ -39,6 +45,7 @@ main{
     flex-direction: column;
     justify-content: space-between;
     padding: 5px;
+    overflow: hidden;
 }
 
 .topo, .baixo{
