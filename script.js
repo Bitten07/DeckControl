@@ -29,6 +29,34 @@ const container = document.getElementById("cartas")
 const painelDescritivo = document.getElementById("texto-descricao")
 const tituloDescritivo = document.getElementById("titulo-carta")
 
+
+function salvarCartas(){
+    const cartasAtivas = document.querySelectorAll(".carta.ativa");
+    let lista = [];
+    cartasAtivas.forEach(function(carta){
+        lista.push({
+            valor: carta.dataset.valor,
+            naipe: carta.dataset.naipe
+        })
+    })
+    localStorage.setItem("cartasAtivas", JSON.stringify(lista))
+}
+
+function carregarCartas(){
+    const cartasSalvas = JSON.parse(localStorage.getItem("cartasAtivas"))
+
+    if(!cartasSalvas) return;
+
+    cartasSalvas.forEach(function(carta){
+        const selector = `.carta[data-valor="${carta.valor}"][data-naipe="${carta.naipe}"]`
+        const cartaElement = document.querySelector(selector)
+        if(cartaElement){
+            cartaElement.classList.add("ativa")
+        }
+    })
+}
+
+
 function atualizarPainel(){
     painelDescritivo.innerHTML = "";
     const cartasAtivas = document.querySelectorAll(".carta.ativa");
@@ -76,9 +104,14 @@ function criarBaralho(naipes, valores){
             
                 carta.addEventListener("click", function(){
                     carta.classList.toggle("ativa")
+
                     atualizarPainel();
+
+                    salvarCartas();
             })
         }
     }
 }
 criarBaralho(naipes, valores)
+carregarCartas()        
+atualizarPainel()
